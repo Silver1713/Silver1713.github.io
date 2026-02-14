@@ -4,593 +4,893 @@
   <meta name="google-site-verification" content="vRZ9CA83kUvn7B-6FFXMJVjDYkxR9WbkrCe2_YWlUDI" />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Jia Hao Yeo | Software Engineer</title>
-  <meta name="description" content="Jia Hao Yeo is a Singapore-based software engineer and computer science student who builds reliable tools and real-time experiences across web and interactive systems." />
+  <title>Jia Hao Yeo | Computer Science Portfolio</title>
+  <meta
+    name="description"
+    content="Jia Hao Yeo - Computer Science student focused on real-time interactive systems, software engineering, and practical product development."
+  />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            display: ['Space Grotesk', 'sans-serif'],
-          },
-          colors: {
-            accent: '#38bdf8',
-            'accent-strong': '#0ea5e9',
-          },
-          boxShadow: {
-            glow: '0 0 40px rgba(14, 165, 233, 0.35)',
-          },
-        },
-      },
-    };
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       color-scheme: dark;
+      --bg: #070707;
+      --bg-spot: #121212;
+      --bg-end: #000000;
+      --panel: rgba(16, 16, 16, 0.85);
+      --panel-strong: rgba(20, 20, 20, 0.93);
+      --hero-end: rgba(10, 10, 10, 0.84);
+      --text: #f2f2f2;
+      --text-dim: #b9b9b9;
+      --line: rgba(255, 255, 255, 0.17);
+      --line-soft: rgba(255, 255, 255, 0.08);
+      --field-bg: rgba(0, 0, 0, 0.35);
+      --field-text: #f2f2f2;
+      --meta-bg: rgba(0, 0, 0, 0.25);
+      --topbar-bg-1: rgba(7, 7, 7, 0.9);
+      --topbar-bg-2: rgba(7, 7, 7, 0.65);
+      --button-hover-bg: #ffffff;
+      --button-hover-text: #000000;
+      --noise-dot: rgba(255, 255, 255, 0.35);
+      --noise-opacity: 0.09;
+      --grid-line: rgba(255, 255, 255, 0.13);
+      --grid-opacity: 0.16;
+      --scan-line: rgba(255, 255, 255, 0.35);
+      --scan-opacity: 0.11;
+      --scan-blend: soft-light;
+      --scene-opacity: 0.52;
+      --radius: 18px;
+      --maxw: 1100px;
     }
 
+    html[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f4f4f4;
+      --bg-spot: #ffffff;
+      --bg-end: #ececec;
+      --panel: rgba(255, 255, 255, 0.85);
+      --panel-strong: rgba(255, 255, 255, 0.93);
+      --hero-end: rgba(236, 236, 236, 0.9);
+      --text: #111111;
+      --text-dim: #3f3f3f;
+      --line: rgba(0, 0, 0, 0.2);
+      --line-soft: rgba(0, 0, 0, 0.11);
+      --field-bg: rgba(255, 255, 255, 0.88);
+      --field-text: #111111;
+      --meta-bg: rgba(255, 255, 255, 0.82);
+      --topbar-bg-1: rgba(255, 255, 255, 0.86);
+      --topbar-bg-2: rgba(255, 255, 255, 0.72);
+      --button-hover-bg: #111111;
+      --button-hover-text: #ffffff;
+      --noise-dot: rgba(0, 0, 0, 0.24);
+      --noise-opacity: 0.05;
+      --grid-line: rgba(0, 0, 0, 0.11);
+      --grid-opacity: 0.12;
+      --scan-line: rgba(0, 0, 0, 0.22);
+      --scan-opacity: 0.07;
+      --scan-blend: multiply;
+      --scene-opacity: 0.33;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
     body {
-      font-family: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: radial-gradient(circle at top, #0f172a 0%, #020617 55%, #000 100%);
-      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      background: radial-gradient(circle at 0 0, var(--bg-spot) 0%, var(--bg) 45%, var(--bg-end) 100%);
+      color: var(--text);
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      line-height: 1.5;
     }
 
-    body::before {
-      content: '';
+    .noise {
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAI0lEQVQoU2NkYGBw4t+PfjPwHwYGBgYGJgYGB8Z/CBQAALyBBK8lhPEAAAAASUVORK5CYII=');
-      opacity: 0.14;
-      mix-blend-mode: soft-light;
-      z-index: 1;
+      z-index: 0;
+      opacity: var(--noise-opacity);
+      background-image: radial-gradient(var(--noise-dot) 0.45px, transparent 0.45px);
+      background-size: 3px 3px;
     }
 
-    body::after {
-      content: '';
+    .tech-grid {
       position: fixed;
       inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 18% 20%, rgba(56, 189, 248, 0.16), transparent 58%),
-        radial-gradient(circle at 82% 0%, rgba(14, 165, 233, 0.12), transparent 55%),
-        radial-gradient(circle at 50% 100%, rgba(13, 148, 136, 0.08), transparent 60%);
       z-index: 1;
+      pointer-events: none;
+      opacity: var(--grid-opacity);
+      background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: radial-gradient(circle at 50% 40%, black 25%, transparent 75%);
     }
 
-    .site-header {
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: var(--scan-opacity);
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 3px,
+        var(--scan-line) 4px
+      );
+      mix-blend-mode: var(--scan-blend);
+      animation: scanMove 9s linear infinite;
+    }
+
+    #scene {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      opacity: var(--scene-opacity);
+      pointer-events: none;
+    }
+
+    .shell {
+      position: relative;
+      z-index: 2;
+      width: min(var(--maxw), 92vw);
+      margin: 0 auto;
+      padding: 1.2rem 0 3rem;
+    }
+
+    .topbar {
       position: sticky;
+      top: 0;
+      z-index: 4;
+      backdrop-filter: blur(8px);
+      background: linear-gradient(to bottom, var(--topbar-bg-1), var(--topbar-bg-2));
+      border-bottom: 1px solid var(--line-soft);
     }
 
-    .site-header::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      bottom: 0;
-      width: 70%;
-      height: 1px;
-      transform: translateX(-50%);
-      background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.45), transparent);
-      opacity: 0.4;
+    .topbar-inner {
+      width: min(var(--maxw), 92vw);
+      margin: 0 auto;
+      padding: 0.9rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
 
-    .hero-section {
-      position: relative;
-      overflow: hidden;
-      border-radius: 32px;
-      border: 1px solid rgba(148, 163, 184, 0.16);
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(8, 11, 19, 0.65));
-      box-shadow: 0 40px 80px rgba(2, 6, 23, 0.55);
+    .brand {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.92rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
-    .hero-section::before {
-      content: '';
-      position: absolute;
-      inset: -40% -20% -60% -10%;
-      background: conic-gradient(from 160deg, rgba(56, 189, 248, 0.3), rgba(15, 23, 42, 0.15), rgba(56, 189, 248, 0));
-      filter: blur(120px);
-      opacity: 0.8;
+    .menu {
+      display: flex;
+      gap: 0.95rem;
+      flex-wrap: wrap;
     }
 
-    .hero-section::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(120deg, rgba(148, 163, 184, 0.12) 0%, rgba(148, 163, 184, 0) 70%),
-        repeating-linear-gradient(90deg, rgba(30, 41, 59, 0.4) 0, rgba(30, 41, 59, 0.4) 1px, transparent 1px, transparent 120px);
-      opacity: 0.35;
-      mix-blend-mode: screen;
+    .menu a,
+    .cta {
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--line);
+      padding: 0.42rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-family: "IBM Plex Mono", monospace;
+      transition: 180ms ease;
     }
 
-    .section-shell {
-      position: relative;
-      border-radius: 32px;
-      padding: clamp(2rem, 5vw, 3rem);
-      background: linear-gradient(140deg, rgba(15, 23, 42, 0.92), rgba(8, 13, 23, 0.78));
-      border: 1px solid rgba(148, 163, 184, 0.18);
-      box-shadow: 0 30px 60px rgba(2, 6, 23, 0.55);
-      backdrop-filter: blur(24px);
-      overflow: hidden;
+    .menu a:hover,
+    .cta:hover,
+    .theme-toggle:hover {
+      background: var(--button-hover-bg);
+      color: var(--button-hover-text);
+      border-color: var(--button-hover-bg);
     }
 
-    .section-shell::before {
-      content: '';
-      position: absolute;
-      inset: -35% 40% 40% -30%;
-      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.24), transparent 65%);
-      opacity: 0.8;
+    .theme-toggle {
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--text);
+      border-radius: 999px;
+      padding: 0.42rem 0.7rem;
+      font-size: 0.82rem;
+      font-family: "IBM Plex Mono", monospace;
+      cursor: pointer;
+      transition: 180ms ease;
     }
 
-    .section-shell::after {
-      content: '';
-      position: absolute;
-      inset: 6px;
-      border-radius: 26px;
-      border: 1px solid rgba(148, 163, 184, 0.12);
-      opacity: 0.4;
-      pointer-events: none;
-    }
-
-    .section-shell > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .section-shell--accent {
-      border-color: rgba(56, 189, 248, 0.45);
-      box-shadow: 0 30px 70px rgba(8, 145, 178, 0.35);
-    }
-
-    .section-shell--accent::before {
-      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.45), transparent 55%);
-      opacity: 1;
-    }
-
-    .stat-card,
-    .focus-card,
-    .feature-card {
-      position: relative;
+    .hero {
+      margin-top: 2rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(130deg, var(--panel-strong), var(--hero-end));
       overflow: hidden;
     }
 
-    .stat-card::before {
-      content: '';
-      position: absolute;
-      inset: -50% 50% 0 -30%;
-      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.28), transparent 62%);
-      opacity: 0.5;
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.2rem;
+      padding: clamp(1.2rem, 4vw, 2.2rem);
     }
 
-    .stat-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.16), transparent 65%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
+    .tag {
+      font-family: "IBM Plex Mono", monospace;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin: 0 0 0.55rem;
     }
 
-    .stat-card:hover::after {
-      opacity: 0.35;
+    h1,
+    h2,
+    h3 {
+      margin: 0 0 0.6rem;
+      line-height: 1.2;
     }
 
-    .focus-card::before {
-      content: '';
-      position: absolute;
-      inset: -30% -30% 40% -40%;
-      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.28), transparent 65%);
-      filter: blur(40px);
-      opacity: 0.9;
+    h1 {
+      font-size: clamp(1.85rem, 4.8vw, 3.1rem);
     }
 
-    .focus-card::after {
-      content: '';
-      position: absolute;
-      inset: 2px;
-      border-radius: inherit;
-      border: 1px solid rgba(148, 163, 184, 0.16);
-      opacity: 0.8;
-      pointer-events: none;
+    .intro {
+      color: var(--text-dim);
+      max-width: 60ch;
     }
 
-    .feature-card {
-      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    .hero-meta {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--meta-bg);
+      padding: 0.95rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.8rem;
     }
 
-    .feature-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(140deg, rgba(56, 189, 248, 0.18), rgba(15, 118, 110, 0));
-      opacity: 0;
-      transition: opacity 0.35s ease;
+    .hero-meta p {
+      margin: 0 0 0.55rem;
+      color: var(--text-dim);
     }
 
-    .feature-card::after {
-      content: '';
-      position: absolute;
-      inset: 1px;
-      border-radius: inherit;
-      border: 1px solid rgba(148, 163, 184, 0.12);
-      opacity: 0.8;
-      pointer-events: none;
+    .hero-meta a {
+      color: var(--text);
     }
 
-    .feature-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(56, 189, 248, 0.4);
-      box-shadow: 0 24px 50px rgba(2, 6, 23, 0.55);
+    .section {
+      margin-top: 1.2rem;
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius);
+      background: var(--panel);
+      padding: clamp(1.1rem, 2.8vw, 1.6rem);
     }
 
-    .feature-card:hover::before {
-      opacity: 1;
+    .grid-two {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .timeline-card {
-      position: relative;
-      padding-left: 1.5rem;
+    .card {
+      border: 1px solid var(--line-soft);
+      border-radius: 14px;
+      padding: 0.95rem;
+      background: rgba(255, 255, 255, 0.01);
     }
 
-    .timeline-card::before {
-      content: '';
-      position: absolute;
-      left: 0.75rem;
-      top: 0.65rem;
-      bottom: 0.65rem;
-      width: 1px;
-      background: linear-gradient(180deg, rgba(56, 189, 248, 0.28), rgba(148, 163, 184, 0));
+    .timeline-item {
+      border-left: 1px solid var(--line);
+      margin-left: 0.35rem;
+      padding-left: 1rem;
+      margin-bottom: 1rem;
     }
 
-    .timeline-card::after {
-      content: '';
-      position: absolute;
-      left: 0.3rem;
-      top: 1.1rem;
-      width: 0.75rem;
-      height: 0.75rem;
-      border-radius: 9999px;
-      background: rgba(56, 189, 248, 0.9);
-      box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.16);
+    .timeline-item:last-child {
+      margin-bottom: 0;
     }
 
-    @media (min-width: 768px) {
-      .timeline-card {
-        padding-left: 2.75rem;
-      }
-
-      .timeline-card::before {
-        left: 1.1rem;
-      }
-
-      .timeline-card::after {
-        left: 0.65rem;
-      }
+    .timeline-item h3 {
+      font-size: 1.02rem;
     }
 
-    .link-accent {
-      position: relative;
+    .meta {
+      margin: 0 0 0.4rem;
+      color: var(--text-dim);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.78rem;
     }
 
-    .link-accent::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -0.2rem;
+    ul {
+      margin: 0.4rem 0 0;
+      padding-left: 1.15rem;
+      color: var(--text-dim);
+    }
+
+    .stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.6rem;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.28rem 0.55rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.76rem;
+    }
+
+    .contact-form {
+      margin-top: 0.9rem;
+      display: grid;
+      gap: 0.7rem;
+      max-width: 720px;
+    }
+
+    .contact-form label {
+      display: grid;
+      gap: 0.35rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.76rem;
+      color: var(--text-dim);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
       width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, rgba(56, 189, 248, 0.6), transparent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease;
+      border: 1px solid var(--line);
+      background: var(--field-bg);
+      color: var(--field-text);
+      border-radius: 10px;
+      padding: 0.65rem 0.75rem;
+      font: inherit;
     }
 
-    .link-accent:hover::after {
-      transform: scaleX(1);
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: var(--text-dim);
+    }
+
+    .contact-form textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .contact-form button {
+      width: fit-content;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--text);
+      border-radius: 999px;
+      padding: 0.5rem 0.95rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: 180ms ease;
+    }
+
+    .contact-form button:hover {
+      background: var(--button-hover-bg);
+      color: var(--button-hover-text);
+      border-color: var(--button-hover-bg);
+    }
+
+    .contact-note {
+      margin-top: 0.6rem;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    .direct-links {
+      margin-top: 0.85rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.55rem;
+      max-width: 720px;
+    }
+
+    .direct-link {
+      display: block;
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.65rem 0.75rem;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .direct-link-head {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-bottom: 0.18rem;
+    }
+
+    .direct-link-icon {
+      width: 1rem;
+      height: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      flex: 0 0 auto;
+    }
+
+    .direct-link-icon svg {
+      width: 1rem;
+      height: 1rem;
+      display: block;
+      fill: currentColor;
+    }
+
+    .direct-link strong {
+      display: block;
+      font-size: 0.82rem;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .direct-link span {
+      color: var(--text-dim);
+      font-size: 0.84rem;
+      word-break: break-all;
+    }
+
+    .direct-link:hover {
+      transform: translateY(-2px);
+      border-color: var(--text);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.02));
+    }
+
+    footer {
+      margin-top: 1.5rem;
+      color: var(--text-dim);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.78rem;
+      border-top: 1px solid var(--line-soft);
+      padding-top: 1rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: rise 650ms ease forwards;
+    }
+
+    .reveal:nth-child(2) { animation-delay: 90ms; }
+    .reveal:nth-child(3) { animation-delay: 150ms; }
+    .reveal:nth-child(4) { animation-delay: 210ms; }
+    .reveal:nth-child(5) { animation-delay: 270ms; }
+
+    @keyframes rise {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes scanMove {
+      from { transform: translateY(-12px); }
+      to { transform: translateY(12px); }
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .grid-two {
+        grid-template-columns: 1fr;
+      }
+      .direct-links {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .menu {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+      #scene,
+      .tech-grid,
+      .scanlines {
+        display: none;
+      }
     }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 antialiased">
-  <div class="relative min-h-screen overflow-hidden">
-    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-      <canvas id="hero-canvas" class="h-full w-full"></canvas>
-      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/60 to-slate-950"></div>
-    </div>
+<body>
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="tech-grid" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
 
-    <header class="site-header sticky top-0 z-20 border-b border-slate-800/60 bg-slate-950/70 backdrop-blur">
-      <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 text-sm">
-        <a href="#top" class="font-semibold tracking-tight text-slate-100 transition hover:text-accent">Jia Hao Yeo</a>
-        <div class="hidden gap-8 md:flex">
-          <a href="#about" class="transition hover:text-accent">About</a>
-          <a href="#projects" class="transition hover:text-accent">Projects</a>
-          <a href="#experience" class="transition hover:text-accent">Experience</a>
-          <a href="#education" class="transition hover:text-accent">Education</a>
-          <a href="#contact" class="transition hover:text-accent">Contact</a>
-        </div>
-        <a href="mailto:jiahao.yeo.23@gmail.com" class="rounded-full bg-accent/20 px-4 py-2 font-medium text-accent transition hover:bg-accent hover:text-slate-950">Let's build</a>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">jia hao yeo // computer science</div>
+      <nav class="menu">
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
       </nav>
-    </header>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark and light mode" aria-pressed="false">Light Mode</button>
+    </div>
+  </header>
 
-    <main id="top" class="relative z-10">
-      <section class="hero-section mx-auto flex max-w-6xl flex-col gap-10 px-6 pb-24 pt-32 md:flex-row md:items-center md:gap-20">
-        <div class="flex-1 space-y-6">
-          <p class="text-sm uppercase tracking-[0.4rem] text-accent">Software Engineer & Real-Time Builder</p>
-          <h1 class="font-display text-4xl font-semibold leading-tight text-slate-100 sm:text-5xl md:text-6xl">
-            Shipping reliable software that bridges systems and experience.
-          </h1>
-          <p class="max-w-xl text-lg text-slate-300">
-            I'm Jia Hao Yeo, a Singapore-based software engineer currently studying Computer Science in Real-Time Interactive Simulation at the Singapore Institute of Technology. I design and deliver full-stack tools, gameplay systems, and developer experiences with C++, Java, JavaScript, and user-first thinking.
+  <main class="shell">
+    <section class="hero reveal">
+      <div class="hero-grid">
+        <div>
+          <p class="tag">Profile</p>
+          <h1>Jia Hao Yeo</h1>
+          <p class="intro">
+            Computer Science undergraduate specializing in real-time interactive simulation, with hands-on experience
+            in full-stack development, game systems, and practical software engineering.
           </p>
-          <div class="flex flex-wrap items-center gap-4">
-            <a href="#projects" class="rounded-full bg-accent px-5 py-3 font-semibold text-slate-950 shadow-glow transition hover:-translate-y-0.5 hover:bg-accent-strong">View featured work</a>
-            <a href="mailto:jiahao.yeo.23@gmail.com" class="rounded-full border border-slate-700 px-5 py-3 font-semibold text-slate-200 transition hover:border-accent hover:text-accent">Drop me a note</a>
-          </div>
-          <div class="grid max-w-xl grid-cols-2 gap-4 text-sm text-slate-300 sm:grid-cols-3">
-            <div class="stat-card rounded-2xl border border-slate-800/70 bg-slate-900/60 p-4 backdrop-blur">
-              <p class="text-xs uppercase tracking-wide text-slate-400">Languages</p>
-              <p class="mt-1 font-semibold text-slate-100">C++ / C / Java / Python / TypeScript</p>
-            </div>
-            <div class="stat-card rounded-2xl border border-slate-800/70 bg-slate-900/60 p-4 backdrop-blur">
-              <p class="text-xs uppercase tracking-wide text-slate-400">Platforms</p>
-              <p class="mt-1 font-semibold text-slate-100">React / Node.js / Unity / SQL</p>
-            </div>
-            <div class="stat-card rounded-2xl border border-slate-800/70 bg-slate-900/60 p-4 backdrop-blur sm:col-span-1">
-              <p class="text-xs uppercase tracking-wide text-slate-400">Strengths</p>
-              <p class="mt-1 font-semibold text-slate-100">Systems design, UX, team collaboration</p>
-            </div>
+          <div class="stack">
+            <span class="pill">C / C++</span>
+            <span class="pill">C#</span>
+            <span class="pill">JavaScript</span>
+            <span class="pill">Python</span>
+            <span class="pill">ReactJS</span>
+            <span class="pill">NodeJS</span>
           </div>
         </div>
-        <div class="flex flex-1 items-center justify-center">
-          <div class="focus-card relative w-full max-w-sm rounded-3xl border border-slate-800/80 bg-slate-900/40 p-6 backdrop-blur">
-            <div class="absolute -top-8 left-1/2 h-16 w-16 -translate-x-1/2 rounded-full bg-accent/30 blur-2xl"></div>
-            <div class="space-y-4 text-sm text-slate-300">
-              <p class="font-semibold text-slate-200">Currently building</p>
-              <p>
-                Taking Memory Flame from vision to engine with OpenGL rendering, a C# scripting sandbox, and editor UX improvements that help designers iterate faster.
-              </p>
-              <div class="grid grid-cols-2 gap-3 text-xs">
-                <div class="stat-card rounded-xl border border-slate-800/70 bg-slate-950/60 p-3">
-                  <p class="uppercase tracking-wide text-slate-400">Interests</p>
-                  <p class="mt-1 font-semibold text-slate-100">Developer tooling, game tech, accessibility</p>
-                </div>
-                <div class="stat-card rounded-xl border border-slate-800/70 bg-slate-950/60 p-3">
-                  <p class="uppercase tracking-wide text-slate-400">Recent win</p>
-                  <p class="mt-1 font-semibold text-slate-100">Delivered SIT lab booking UI with Apps Script</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="about" class="mx-auto max-w-5xl px-6 py-20">
-        <div class="section-shell grid gap-12 md:grid-cols-[1.1fr_0.9fr]">
-          <div>
-            <h2 class="font-display text-3xl font-semibold text-slate-100">From realtime labs to shipped products</h2>
-            <p class="mt-4 text-lg text-slate-300">
-              I build software that balances technical rigor with polish. Whether it is a simulation prototype, an Android navigation tool, or a booking workflow for campus labs, I focus on aligning user experience with reliable engineering.
-            </p>
-            <p class="mt-4 text-lg text-slate-300">
-              Working across multidisciplinary teams taught me to pair fast iteration with thoughtful architecture. Clear communication, collaboration, and documentation keep projects moving and help teammates grow together.
-            </p>
-          </div>
-          <div class="space-y-6">
-            <div class="rounded-3xl border border-slate-800/70 bg-slate-950/60 p-6 backdrop-blur">
-              <p class="text-xs uppercase tracking-[0.2em] text-slate-400">Toolbox</p>
-              <ul class="mt-4 grid grid-cols-2 gap-3 text-sm text-slate-200">
-                <li>C / C++</li>
-                <li>Java & Kotlin</li>
-                <li>Python</li>
-                <li>JavaScript / TypeScript</li>
-                <li>React & Node.js</li>
-                <li>Unity</li>
-                <li>SQL & mySQL</li>
-                <li>Figma & Adobe XD</li>
-              </ul>
-            </div>
-            <div class="rounded-3xl border border-slate-800/70 bg-slate-950/60 p-6 backdrop-blur">
-              <p class="text-xs uppercase tracking-[0.2em] text-slate-400">Values</p>
-              <ul class="mt-4 space-y-3 text-sm text-slate-200">
-                <li><span class="font-semibold text-slate-100">Build for clarity.</span> Interfaces should feel obvious, even when systems are complex.</li>
-                <li><span class="font-semibold text-slate-100">Prototype and learn.</span> Tight feedback loops surface the right problems to solve.</li>
-                <li><span class="font-semibold text-slate-100">Elevate the team.</span> Share knowledge, document decisions, and ship together.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="projects" class="mx-auto max-w-6xl px-6 py-20">
-        <div class="section-shell space-y-12">
-          <div class="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p class="text-sm uppercase tracking-[0.4em] text-accent">Selected work</p>
-              <h2 class="mt-4 font-display text-3xl font-semibold text-slate-100">Projects that blend tooling and play</h2>
-            </div>
-            <a class="link-accent inline-flex items-center gap-2 text-sm font-semibold text-accent transition hover:text-accent-strong" href="https://github.com/silver1713" target="_blank" rel="noreferrer">
-              Explore GitHub
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5h10m0 0v10m0-10L5 19" />
-              </svg>
-            </a>
-          </div>
-
-          <div class="grid gap-8 md:grid-cols-3">
-            <article class="feature-card group rounded-3xl border border-slate-800/70 bg-slate-950/60 p-8 backdrop-blur">
-              <p class="text-xs uppercase tracking-[0.3em] text-slate-400">01</p>
-              <h3 class="mt-5 text-xl font-semibold text-slate-100">Memory Flame Engine</h3>
-              <p class="mt-3 text-sm text-slate-300">Led development of a custom game engine and editor, delivering OpenGL rendering, a C# scripting layer, and UX improvements that streamlined designer workflows.</p>
-              <ul class="mt-6 flex flex-wrap gap-2 text-xs text-slate-400">
-                <li class="rounded-full border border-slate-700 px-3 py-1">C++</li>
-                <li class="rounded-full border border-slate-700 px-3 py-1">OpenGL</li>
-                <li class="rounded-full border border-slate-700 px-3 py-1">C#</li>
-              </ul>
-            </article>
-
-            <article class="feature-card group rounded-3xl border border-slate-800/70 bg-slate-950/60 p-8 backdrop-blur">
-              <p class="text-xs uppercase tracking-[0.3em] text-slate-400">02</p>
-              <h3 class="mt-5 text-xl font-semibold text-slate-100">SIT Equipment Booking</h3>
-              <p class="mt-3 text-sm text-slate-300">Designed and built the front-end of an equipment booking system with Google Apps Script, making it effortless for faculty to track inventory and schedule lab resources.</p>
-              <ul class="mt-6 flex flex-wrap gap-2 text-xs text-slate-400">
-                <li class="rounded-full border border-slate-700 px-3 py-1">HTML</li>
-                <li class="rounded-full border border-slate-700 px-3 py-1">JavaScript</li>
-                <li class="rounded-full border border-slate-700 px-3 py-1">Apps Script</li>
-              </ul>
-            </article>
-
-            <article class="feature-card group rounded-3xl border border-slate-800/70 bg-slate-950/60 p-8 backdrop-blur">
-              <p class="text-xs uppercase tracking-[0.3em] text-slate-400">03</p>
-              <h3 class="mt-5 text-xl font-semibold text-slate-100">Game Review Platform</h3>
-              <p class="mt-3 text-sm text-slate-300">Built a full-stack review platform with a Node.js and SQL backend plus a responsive Bootstrap interface so players can share and discover games easily.</p>
-              <ul class="mt-6 flex flex-wrap gap-2 text-xs text-slate-400">
-                <li class="rounded-full border border-slate-700 px-3 py-1">Node.js</li>
-                <li class="rounded-full border border-slate-700 px-3 py-1">SQL</li>
-                <li class="rounded-full border border-slate-700 px-3 py-1">Bootstrap</li>
-              </ul>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="experience" class="mx-auto max-w-5xl px-6 py-20">
-        <div class="section-shell space-y-10">
-          <div>
-            <p class="text-sm uppercase tracking-[0.4em] text-accent">Experience</p>
-            <h2 class="mt-4 font-display text-3xl font-semibold text-slate-100">Hands-on practice across labs and industry</h2>
-          </div>
-          <div class="space-y-10">
-            <div class="timeline-card flex flex-col gap-3 md:flex-row md:items-baseline md:justify-between">
-              <div>
-                <h3 class="text-xl font-semibold text-slate-100">Assistant Developer @ Singapore Institute of Technology</h3>
-                <p class="text-sm text-slate-400">Apr 2024 - Aug 2024 | Singapore</p>
-              </div>
-              <p class="max-w-xl text-sm text-slate-300">Built the front-end of an equipment booking system, delivering seamless logging and scheduling experiences powered by Google Apps Script, HTML, CSS, and JavaScript.</p>
-            </div>
-            <div class="timeline-card flex flex-col gap-3 md:flex-row md:items-baseline md:justify-between">
-              <div>
-                <h3 class="text-xl font-semibold text-slate-100">Research & Development Intern @ Hitachi Asia</h3>
-                <p class="text-sm text-slate-400">Jan 2021 - Jun 2021 | Singapore</p>
-              </div>
-              <p class="max-w-xl text-sm text-slate-300">Researched Bluetooth-based indoor navigation, iterated on Android prototypes, and focused on front-end UX to make indoor positioning intuitive for end users.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="education" class="mx-auto max-w-5xl px-6 py-20">
-        <div class="section-shell space-y-10">
-          <div>
-            <p class="text-sm uppercase tracking-[0.4em] text-accent">Education</p>
-            <h2 class="mt-4 font-display text-3xl font-semibold text-slate-100">Learning the craft inside and outside classrooms</h2>
-          </div>
-          <div class="space-y-10">
-            <div class="timeline-card flex flex-col gap-3 md:flex-row md:items-baseline md:justify-between">
-              <div>
-                <h3 class="text-xl font-semibold text-slate-100">Singapore Institute of Technology</h3>
-                <p class="text-sm text-slate-400">Aug 2023 - Dec 2027 (expected) | B.S. Computer Science in Real-Time Interactive Simulation</p>
-              </div>
-              <p class="max-w-xl text-sm text-slate-300">Coursework highlights: Modern C++ design, algorithm analysis, operating systems, computer graphics, spatial data structures, probability and statistics.</p>
-            </div>
-            <div class="timeline-card flex flex-col gap-3 md:flex-row md:items-baseline md:justify-between">
-              <div>
-                <h3 class="text-xl font-semibold text-slate-100">Temasek Polytechnic</h3>
-                <p class="text-sm text-slate-400">Apr 2018 - Apr 2021 | Diploma in Game Design and Development</p>
-              </div>
-              <p class="max-w-xl text-sm text-slate-300">Focused on object-oriented programming, databases, data structures, and gameplay systems while collaborating on interactive learning experiences.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" class="mx-auto max-w-5xl px-6 pb-24">
-        <div class="section-shell section-shell--accent space-y-6 text-center">
-          <p class="text-sm uppercase tracking-[0.4em] text-accent">Collaborate</p>
-          <h2 class="font-display text-3xl font-semibold text-slate-100">Let's build something remarkable</h2>
-          <p class="mx-auto max-w-2xl text-lg text-slate-300">
-            From immersive engines to intuitive web tooling, I'm excited to collaborate on ambitious ideas. Reach out and let's explore how we can craft the next project together.
-          </p>
-          <div class="mt-4 flex flex-wrap justify-center gap-4 text-sm">
-            <a href="mailto:jiahao.yeo.23@gmail.com" class="rounded-full bg-accent px-6 py-3 font-semibold text-slate-950 transition hover:bg-accent-strong">Email Jia Hao</a>
-            <a href="https://www.linkedin.com/in/jia-hao-yeo/" target="_blank" rel="noreferrer" class="rounded-full border border-slate-700 px-6 py-3 font-semibold text-slate-200 transition hover:border-accent hover:text-accent">Connect on LinkedIn</a>
-            <a href="https://github.com/silver1713" target="_blank" rel="noreferrer" class="rounded-full border border-slate-700 px-6 py-3 font-semibold text-slate-200 transition hover:border-accent hover:text-accent">GitHub</a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="border-t border-slate-800/60 bg-slate-950/80 py-8">
-      <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 text-xs text-slate-500 md:flex-row">
-        <span>&copy; <span id="year"></span> Jia Hao Yeo. Crafted with curiosity.</span>
-        <div class="flex gap-4">
-          <a href="#top" class="transition hover:text-accent">Back to top</a>
-          <a href="https://github.com/silver1713" target="_blank" rel="noreferrer" class="transition hover:text-accent">GitHub</a>
-          <a href="https://www.linkedin.com/in/jia-hao-yeo/" target="_blank" rel="noreferrer" class="transition hover:text-accent">LinkedIn</a>
-        </div>
+        <aside class="hero-meta">
+          <p><strong>Email:</strong> <a href="mailto:jiahao.yeo.23@gmail.com">jiahao.yeo.23@gmail.com</a></p>
+          <p><strong>Phone:</strong> <a href="tel:+6597708284">+65 9770 8284</a></p>
+          <p><strong>GitHub:</strong> <a href="https://github.com/silver1713" target="_blank" rel="noopener">github.com/silver1713</a></p>
+          <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/jia-hao-yeo" target="_blank" rel="noopener">linkedin.com/in/jia-hao-yeo</a></p>
+        </aside>
       </div>
+    </section>
+
+    <section class="section reveal" id="education">
+      <p class="tag">Education</p>
+      <div class="grid-two">
+        <article class="card">
+          <h3>Singapore Institute of Technology</h3>
+          <p class="meta">B.S. Computer Science in Real-Time Interactive Simulation | Aug 2023 - Aug 2027 (Expected)</p>
+          <p>Relevant coursework: High Level Programming, Data Structures and Algorithms, Operating Systems, Computer Networks.</p>
+        </article>
+        <article class="card">
+          <h3>Temasek Polytechnic</h3>
+          <p class="meta">Diploma in Game Design and Development | Apr 2018 - Apr 2021</p>
+          <p>Relevant coursework: Databases, Operating Systems, Computer Networks, Computational Thinking.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="skills">
+      <p class="tag">Technical Skills</p>
+      <div class="grid-two">
+        <article class="card">
+          <h3>Programming Languages</h3>
+          <div class="stack">
+            <span class="pill">C</span>
+            <span class="pill">C++</span>
+            <span class="pill">C#</span>
+            <span class="pill">Java</span>
+            <span class="pill">Python</span>
+            <span class="pill">JavaScript</span>
+            <span class="pill">HTML</span>
+            <span class="pill">CSS</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Technologies & Tools</h3>
+          <div class="stack">
+            <span class="pill">NodeJS</span>
+            <span class="pill">ReactJS</span>
+            <span class="pill">PostgreSQL</span>
+            <span class="pill">Electron</span>
+            <span class="pill">Bootstrap</span>
+            <span class="pill">Unity</span>
+            <span class="pill">Android Studio</span>
+            <span class="pill">Figma</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="experience">
+      <p class="tag">Work Experience</p>
+      <article class="timeline-item">
+        <h3>Assistant Developer | Singapore Institute of Technology</h3>
+        <p class="meta">Apr 2024 - Aug 2024 | Singapore</p>
+        <ul>
+          <li>Developed and optimized the full-stack equipment booking system using JavaScript, HTML, and CSS.</li>
+          <li>Implemented logging and reservation features integrated with spreadsheet-based data storage to improve tracking accuracy.</li>
+        </ul>
+      </article>
+      <article class="timeline-item">
+        <h3>Research and Development Intern | Hitachi Asia</h3>
+        <p class="meta">Aug 2020 - Feb 2021 | Singapore</p>
+        <ul>
+          <li>Benchmarked Bluetooth indoor positioning approaches including RSSI trilateration, fingerprinting, and beacon mapping.</li>
+          <li>Designed and implemented Android screens for an indoor navigation prototype with simulated real-time location updates.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="section reveal" id="projects">
+      <p class="tag">Project Work</p>
+      <div class="grid-two">
+        <article class="card">
+          <h3>Movie Review Application</h3>
+          <p class="meta">2018 | Java, Android Studio</p>
+          <p>Built an Android movie review app with strong UI/UX foundations to support clear and engaging user flow.</p>
+        </article>
+        <article class="card">
+          <h3>Game Review Website</h3>
+          <p class="meta">2018 | Node.js, SQL, Bootstrap</p>
+          <p>Built a full-stack review platform with backend APIs and responsive web interfaces for smooth content submission and browsing.</p>
+        </article>
+        <article class="card">
+          <h3>C++ JSON Parser</h3>
+          <p class="meta">2024 | C++, Compiler Concepts</p>
+          <p>Developed a parser that builds an AST node tree using object-oriented design as a core module in a software project.</p>
+        </article>
+        <article class="card">
+          <h3>Memory Flame</h3>
+          <p class="meta">2024 | OpenGL, C#, Game Engine</p>
+          <p>Led development of a custom OpenGL game engine/editor and integrated a C# scripting workflow to improve designer productivity.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="contact">
+      <p class="tag">Contact Me</p>
+      <h2>Let’s connect.</h2>
+      <p class="intro">I am open to internships, software engineering roles, and technical collaborations.</p>
+      <form class="contact-form" action="mailto:jiahao.yeo.23@gmail.com" method="post" enctype="text/plain">
+        <label>
+          Name
+          <input type="text" name="name" required />
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" required />
+        </label>
+        <label>
+          Message
+          <textarea name="message" required></textarea>
+        </label>
+        <button type="submit">Send Message</button>
+      </form>
+      <p class="contact-note">Direct links</p>
+      <div class="direct-links">
+        <a class="direct-link" href="tel:+6597708284">
+          <span class="direct-link-head">
+            <span class="direct-link-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="img">
+                <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1-.24 11.35 11.35 0 0 0 3.57.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.49a1 1 0 0 1 1 1 11.35 11.35 0 0 0 .57 3.57 1 1 0 0 1-.24 1z"/>
+              </svg>
+            </span>
+            <strong>Phone</strong>
+          </span>
+          <span>+65 9770 8284</span>
+        </a>
+        <a class="direct-link" href="https://github.com/silver1713" target="_blank" rel="noopener">
+          <span class="direct-link-head">
+            <span class="direct-link-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="img">
+                <path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.1.82-.26.82-.58v-2.03c-3.34.73-4.04-1.41-4.04-1.41a3.17 3.17 0 0 0-1.34-1.75c-1.1-.74.08-.72.08-.72a2.5 2.5 0 0 1 1.83 1.23 2.53 2.53 0 0 0 3.46 1 2.53 2.53 0 0 1 .76-1.6c-2.67-.3-5.47-1.34-5.47-5.96a4.67 4.67 0 0 1 1.24-3.24 4.33 4.33 0 0 1 .12-3.19s1.01-.32 3.3 1.24a11.43 11.43 0 0 1 6 0c2.29-1.56 3.3-1.24 3.3-1.24a4.33 4.33 0 0 1 .12 3.19 4.67 4.67 0 0 1 1.24 3.24c0 4.63-2.8 5.66-5.48 5.96a2.84 2.84 0 0 1 .81 2.2v3.26c0 .32.21.69.82.58A12 12 0 0 0 12 .5z"/>
+              </svg>
+            </span>
+            <strong>GitHub</strong>
+          </span>
+          <span>github.com/silver1713</span>
+        </a>
+        <a class="direct-link" href="https://linkedin.com/in/jia-hao-yeo" target="_blank" rel="noopener">
+          <span class="direct-link-head">
+            <span class="direct-link-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="img">
+                <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.05-1.86-3.05-1.86 0-2.15 1.45-2.15 2.95v5.67H9.32V9h3.42v1.56h.05c.48-.9 1.64-1.86 3.37-1.86 3.61 0 4.28 2.37 4.28 5.45v6.3zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45z"/>
+              </svg>
+            </span>
+            <strong>LinkedIn</strong>
+          </span>
+          <span>linkedin.com/in/jia-hao-yeo</span>
+        </a>
+      </div>
+    </section>
+
+    <footer class="reveal">
+      <div>Built for GitHub Pages. Last updated from resume details.</div>
     </footer>
-  </div>
+  </main>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js" integrity="sha512-5oe0Ml2XoBcMwU69wC/AAfHifAxQl+L6ppFkmnZZdgJg+guMzQHNkB4Ga9at0VsIjPVzhPdSjBxNGN0IHQonBA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
-    const canvas = document.getElementById('hero-canvas');
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8));
+    (function () {
+      const storageKey = "theme";
+      const root = document.documentElement;
+      const toggle = document.getElementById("themeToggle");
+      if (!toggle) return;
 
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.z = 6;
+      const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const saved = localStorage.getItem(storageKey);
+      const initialTheme = saved === "light" || saved === "dark" ? saved : preferred;
 
-    const geometry = new THREE.IcosahedronGeometry(2.6, 1);
-    const material = new THREE.MeshStandardMaterial({
-      color: 0x38bdf8,
-      emissive: 0x0a3b5d,
-      metalness: 0.65,
-      roughness: 0.25,
-      transparent: true,
-      opacity: 0.9,
-    });
-    const orb = new THREE.Mesh(geometry, material);
-    scene.add(orb);
+      function applyTheme(theme) {
+        root.setAttribute("data-theme", theme);
+        const isDark = theme === "dark";
+        toggle.textContent = isDark ? "Light Mode" : "Dark Mode";
+        toggle.setAttribute("aria-pressed", String(!isDark));
+        window.dispatchEvent(new CustomEvent("themechange", { detail: { theme } }));
+      }
 
-    const wireMaterial = new THREE.MeshBasicMaterial({ color: 0x1f2937, wireframe: true, transparent: true, opacity: 0.15 });
-    const wire = new THREE.Mesh(new THREE.IcosahedronGeometry(3.2, 2), wireMaterial);
-    scene.add(wire);
+      applyTheme(initialTheme);
+      toggle.addEventListener("click", function () {
+        const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        applyTheme(next);
+        localStorage.setItem(storageKey, next);
+      });
+    })();
+  </script>
 
-    const ambient = new THREE.AmbientLight(0x6b7280, 0.6);
-    const keyLight = new THREE.DirectionalLight(0x0ea5e9, 1.1);
-    keyLight.position.set(4, 6, 8);
-    const rimLight = new THREE.PointLight(0x38bdf8, 1.4, 25);
-    rimLight.position.set(-6, -4, 6);
-    scene.add(ambient, keyLight, rimLight);
+  <script type="module">
+    import * as THREE from "https://unpkg.com/three@0.162.0/build/three.module.js";
 
-    const resize = () => {
-      const width = window.innerWidth;
-      const height = window.innerHeight * 0.9;
-      renderer.setSize(width, height);
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-    };
+    const canvas = document.getElementById("scene");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    window.addEventListener('resize', resize);
-    resize();
+    if (canvas && !reduceMotion) {
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.8));
+      renderer.setSize(window.innerWidth, window.innerHeight);
 
-    const animate = () => {
-      requestAnimationFrame(animate);
-      orb.rotation.x += 0.0025;
-      orb.rotation.y += 0.0015;
-      wire.rotation.y -= 0.0008;
-      wire.rotation.x -= 0.0005;
-      renderer.render(scene, camera);
-    };
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.z = 6.2;
 
-    animate();
+      const particleCount = window.innerWidth < 768 ? 70 : 120;
+      const positions = new Float32Array(particleCount * 3);
+      const velocities = [];
 
-    const yearEl = document.getElementById('year');
-    yearEl.textContent = new Date().getFullYear();
+      for (let i = 0; i < particleCount; i += 1) {
+        const i3 = i * 3;
+        positions[i3] = (Math.random() - 0.5) * 12;
+        positions[i3 + 1] = (Math.random() - 0.5) * 8;
+        positions[i3 + 2] = (Math.random() - 0.5) * 5;
+        velocities.push({
+          x: (Math.random() - 0.5) * 0.0045,
+          y: (Math.random() - 0.5) * 0.0045
+        });
+      }
+
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+      const pointMaterial = new THREE.PointsMaterial({
+        color: 0xffffff,
+        size: 0.042,
+        transparent: true,
+        opacity: 0.62,
+        blending: THREE.AdditiveBlending
+      });
+      const points = new THREE.Points(geo, pointMaterial);
+      scene.add(points);
+
+      const lineMaterial = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.15 });
+      const maxLinks = particleCount * 12;
+      const lineGeo = new THREE.BufferGeometry();
+      const linePositions = new Float32Array(maxLinks * 6);
+      lineGeo.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
+      const lineSegments = new THREE.LineSegments(lineGeo, lineMaterial);
+      scene.add(lineSegments);
+
+      const ring = new THREE.Mesh(
+        new THREE.TorusGeometry(2.4, 0.009, 8, 96),
+        new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.09 })
+      );
+      ring.rotation.x = Math.PI * 0.5;
+      scene.add(ring);
+
+      const bounds = { x: 6, y: 4 };
+      let pointBaseOpacity = 0.52;
+      let lineBaseOpacity = 0.11;
+
+      function applySceneTheme(theme) {
+        const light = theme === "light";
+        const color = light ? 0x111111 : 0xffffff;
+        pointMaterial.color.setHex(color);
+        lineMaterial.color.setHex(color);
+        ring.material.color.setHex(color);
+        pointMaterial.blending = light ? THREE.NormalBlending : THREE.AdditiveBlending;
+        pointMaterial.needsUpdate = true;
+        pointBaseOpacity = light ? 0.24 : 0.52;
+        lineBaseOpacity = light ? 0.08 : 0.11;
+        ring.material.opacity = light ? 0.06 : 0.09;
+      }
+
+      function updateNetwork(time) {
+        let ptr = 0;
+        const pos = geo.attributes.position.array;
+
+        for (let i = 0; i < particleCount; i += 1) {
+          const i3 = i * 3;
+          pos[i3] += velocities[i].x;
+          pos[i3 + 1] += velocities[i].y;
+
+          if (Math.abs(pos[i3]) > bounds.x) velocities[i].x *= -1;
+          if (Math.abs(pos[i3 + 1]) > bounds.y) velocities[i].y *= -1;
+        }
+
+        for (let a = 0; a < particleCount; a += 1) {
+          const a3 = a * 3;
+          for (let b = a + 1; b < particleCount; b += 1) {
+            const b3 = b * 3;
+            const dx = pos[a3] - pos[b3];
+            const dy = pos[a3 + 1] - pos[b3 + 1];
+            const dz = pos[a3 + 2] - pos[b3 + 2];
+            const d = Math.sqrt(dx * dx + dy * dy + dz * dz);
+            if (d < 1.12 && ptr < linePositions.length - 6) {
+              linePositions[ptr++] = pos[a3];
+              linePositions[ptr++] = pos[a3 + 1];
+              linePositions[ptr++] = pos[a3 + 2];
+              linePositions[ptr++] = pos[b3];
+              linePositions[ptr++] = pos[b3 + 1];
+              linePositions[ptr++] = pos[b3 + 2];
+            }
+          }
+        }
+
+        while (ptr < linePositions.length) linePositions[ptr++] = 0;
+
+        pointMaterial.opacity = pointBaseOpacity + Math.sin(time * 0.0017) * 0.05;
+        lineMaterial.opacity = lineBaseOpacity + Math.sin(time * 0.0012) * 0.02;
+
+        geo.attributes.position.needsUpdate = true;
+        lineGeo.attributes.position.needsUpdate = true;
+      }
+
+      function animate(time = 0) {
+        updateNetwork(time);
+        scene.rotation.y += 0.0009;
+        ring.rotation.z += 0.0011;
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      }
+
+      function onResize() {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+      }
+
+      const initialTheme = document.documentElement.getAttribute("data-theme") || "dark";
+      applySceneTheme(initialTheme);
+      window.addEventListener("themechange", (event) => {
+        applySceneTheme(event.detail?.theme || "dark");
+      });
+      window.addEventListener("resize", onResize);
+      animate();
+    }
   </script>
 </body>
 </html>
