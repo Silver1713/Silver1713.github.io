@@ -5,902 +5,159 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jia Hao Yeo | Computer Science Portfolio</title>
-  <meta
-    name="description"
-    content="Jia Hao Yeo - Computer Science student focused on real-time interactive systems, software engineering, and practical product development."
-  />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      color-scheme: dark;
-      --bg: #070707;
-      --bg-spot: #121212;
-      --bg-end: #000000;
-      --panel: rgba(16, 16, 16, 0.85);
-      --panel-strong: rgba(20, 20, 20, 0.93);
-      --hero-end: rgba(10, 10, 10, 0.84);
-      --text: #f2f2f2;
-      --text-dim: #b9b9b9;
-      --line: rgba(255, 255, 255, 0.17);
-      --line-soft: rgba(255, 255, 255, 0.08);
-      --field-bg: rgba(0, 0, 0, 0.35);
-      --field-text: #f2f2f2;
-      --meta-bg: rgba(0, 0, 0, 0.25);
-      --topbar-bg-1: rgba(7, 7, 7, 0.9);
-      --topbar-bg-2: rgba(7, 7, 7, 0.65);
-      --button-hover-bg: #ffffff;
-      --button-hover-text: #000000;
-      --noise-dot: rgba(255, 255, 255, 0.35);
-      --noise-opacity: 0.09;
-      --grid-line: rgba(255, 255, 255, 0.13);
-      --grid-opacity: 0.16;
-      --scan-line: rgba(255, 255, 255, 0.35);
-      --scan-opacity: 0.11;
-      --scan-blend: soft-light;
-      --scene-opacity: 0.52;
-      --radius: 18px;
-      --maxw: 1100px;
-    }
-
-    html[data-theme="light"] {
-      color-scheme: light;
-      --bg: #f4f4f4;
-      --bg-spot: #ffffff;
-      --bg-end: #ececec;
-      --panel: rgba(255, 255, 255, 0.85);
-      --panel-strong: rgba(255, 255, 255, 0.93);
-      --hero-end: rgba(236, 236, 236, 0.9);
-      --text: #111111;
-      --text-dim: #3f3f3f;
-      --line: rgba(0, 0, 0, 0.2);
-      --line-soft: rgba(0, 0, 0, 0.11);
-      --field-bg: rgba(255, 255, 255, 0.88);
-      --field-text: #111111;
-      --meta-bg: rgba(255, 255, 255, 0.82);
-      --topbar-bg-1: rgba(255, 255, 255, 0.86);
-      --topbar-bg-2: rgba(255, 255, 255, 0.72);
-      --button-hover-bg: #111111;
-      --button-hover-text: #ffffff;
-      --noise-dot: rgba(0, 0, 0, 0.24);
-      --noise-opacity: 0.05;
-      --grid-line: rgba(0, 0, 0, 0.11);
-      --grid-opacity: 0.12;
-      --scan-line: rgba(0, 0, 0, 0.22);
-      --scan-opacity: 0.07;
-      --scan-blend: multiply;
-      --scene-opacity: 0.33;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      min-height: 100%;
-      background: radial-gradient(circle at 0 0, var(--bg-spot) 0%, var(--bg) 45%, var(--bg-end) 100%);
-      color: var(--text);
-      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
-      line-height: 1.5;
-    }
-
-    .noise {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      opacity: var(--noise-opacity);
-      background-image: radial-gradient(var(--noise-dot) 0.45px, transparent 0.45px);
-      background-size: 3px 3px;
-    }
-
-    .tech-grid {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      opacity: var(--grid-opacity);
-      background-image:
-        linear-gradient(var(--grid-line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-      background-size: 46px 46px;
-      mask-image: radial-gradient(circle at 50% 40%, black 25%, transparent 75%);
-    }
-
-    .scanlines {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      opacity: var(--scan-opacity);
-      background: repeating-linear-gradient(
-        to bottom,
-        transparent 0,
-        transparent 3px,
-        var(--scan-line) 4px
-      );
-      mix-blend-mode: var(--scan-blend);
-      animation: scanMove 9s linear infinite;
-    }
-
-    #scene {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      opacity: var(--scene-opacity);
-      pointer-events: none;
-    }
-
-    .shell {
-      position: relative;
-      z-index: 2;
-      width: min(var(--maxw), 92vw);
-      margin: 0 auto;
-      padding: 1.2rem 0 3rem;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 4;
-      backdrop-filter: blur(8px);
-      background: linear-gradient(to bottom, var(--topbar-bg-1), var(--topbar-bg-2));
-      border-bottom: 1px solid var(--line-soft);
-    }
-
-    .topbar-inner {
-      width: min(var(--maxw), 92vw);
-      margin: 0 auto;
-      padding: 0.9rem 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .brand {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.92rem;
-      color: var(--text-dim);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .menu {
-      display: flex;
-      gap: 0.95rem;
-      flex-wrap: wrap;
-    }
-
-    .menu a,
-    .cta {
-      text-decoration: none;
-      color: var(--text);
-      border: 1px solid var(--line);
-      padding: 0.42rem 0.7rem;
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-family: "IBM Plex Mono", monospace;
-      transition: 180ms ease;
-    }
-
-    .menu a:hover,
-    .cta:hover,
-    .theme-toggle:hover {
-      background: var(--button-hover-bg);
-      color: var(--button-hover-text);
-      border-color: var(--button-hover-bg);
-    }
-
-    .theme-toggle {
-      border: 1px solid var(--line);
-      background: transparent;
-      color: var(--text);
-      border-radius: 999px;
-      padding: 0.42rem 0.7rem;
-      font-size: 0.82rem;
-      font-family: "IBM Plex Mono", monospace;
-      cursor: pointer;
-      transition: 180ms ease;
-    }
-
-    .hero {
-      margin-top: 2rem;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: linear-gradient(130deg, var(--panel-strong), var(--hero-end));
-      overflow: hidden;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 1.2rem;
-      padding: clamp(1.2rem, 4vw, 2.2rem);
-    }
-
-    .tag {
-      font-family: "IBM Plex Mono", monospace;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      color: var(--text-dim);
-      margin: 0 0 0.55rem;
-    }
-
-    h1,
-    h2,
-    h3 {
-      margin: 0 0 0.6rem;
-      line-height: 1.2;
-    }
-
-    h1 {
-      font-size: clamp(1.85rem, 4.8vw, 3.1rem);
-    }
-
-    .intro {
-      color: var(--text-dim);
-      max-width: 60ch;
-    }
-
-    .hero-meta {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: var(--meta-bg);
-      padding: 0.95rem;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.8rem;
-    }
-
-    .hero-meta p {
-      margin: 0 0 0.55rem;
-      color: var(--text-dim);
-    }
-
-    .hero-meta a {
-      color: var(--text);
-    }
-
-    .section {
-      margin-top: 1.2rem;
-      border: 1px solid var(--line-soft);
-      border-radius: var(--radius);
-      background: var(--panel);
-      padding: clamp(1.1rem, 2.8vw, 1.6rem);
-    }
-
-    .grid-two {
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .card {
-      border: 1px solid var(--line-soft);
-      border-radius: 14px;
-      padding: 0.95rem;
-      background: rgba(255, 255, 255, 0.01);
-    }
-
-    .timeline-item {
-      border-left: 1px solid var(--line);
-      margin-left: 0.35rem;
-      padding-left: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .timeline-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .timeline-item h3 {
-      font-size: 1.02rem;
-    }
-
-    .meta {
-      margin: 0 0 0.4rem;
-      color: var(--text-dim);
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.78rem;
-    }
-
-    ul {
-      margin: 0.4rem 0 0;
-      padding-left: 1.15rem;
-      color: var(--text-dim);
-    }
-
-    .stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 0.6rem;
-    }
-
-    .pill {
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 0.28rem 0.55rem;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.76rem;
-    }
-
-    .contact-form {
-      margin-top: 0.9rem;
-      display: grid;
-      gap: 0.7rem;
-      max-width: 720px;
-    }
-
-    .contact-form label {
-      display: grid;
-      gap: 0.35rem;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.76rem;
-      color: var(--text-dim);
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      border: 1px solid var(--line);
-      background: var(--field-bg);
-      color: var(--field-text);
-      border-radius: 10px;
-      padding: 0.65rem 0.75rem;
-      font: inherit;
-    }
-
-    .contact-form input::placeholder,
-    .contact-form textarea::placeholder {
-      color: var(--text-dim);
-    }
-
-    .contact-form textarea {
-      min-height: 130px;
-      resize: vertical;
-    }
-
-    .contact-form button {
-      width: fit-content;
-      border: 1px solid var(--line);
-      background: transparent;
-      color: var(--text);
-      border-radius: 999px;
-      padding: 0.5rem 0.95rem;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: 180ms ease;
-    }
-
-    .contact-form button:hover {
-      background: var(--button-hover-bg);
-      color: var(--button-hover-text);
-      border-color: var(--button-hover-bg);
-    }
-
-    .contact-note {
-      margin-top: 0.6rem;
-      color: var(--text-dim);
-      font-size: 0.9rem;
-    }
-
-    .direct-links {
-      margin-top: 0.85rem;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.55rem;
-      max-width: 720px;
-    }
-
-    .direct-link {
-      display: block;
-      text-decoration: none;
-      color: var(--text);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 0.65rem 0.75rem;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
-      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
-    }
-
-    .direct-link-head {
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      margin-bottom: 0.18rem;
-    }
-
-    .direct-link-icon {
-      width: 1rem;
-      height: 1rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text);
-      flex: 0 0 auto;
-    }
-
-    .direct-link-icon svg {
-      width: 1rem;
-      height: 1rem;
-      display: block;
-      fill: currentColor;
-    }
-
-    .direct-link strong {
-      display: block;
-      font-size: 0.82rem;
-      font-family: "IBM Plex Mono", monospace;
-    }
-
-    .direct-link span {
-      color: var(--text-dim);
-      font-size: 0.84rem;
-      word-break: break-all;
-    }
-
-    .direct-link:hover {
-      transform: translateY(-2px);
-      border-color: var(--text);
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.02));
-    }
-
-    footer {
-      margin-top: 1.5rem;
-      color: var(--text-dim);
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.78rem;
-      border-top: 1px solid var(--line-soft);
-      padding-top: 1rem;
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(16px);
-      animation: rise 650ms ease forwards;
-    }
-
-    .reveal:nth-child(2) { animation-delay: 90ms; }
-    .reveal:nth-child(3) { animation-delay: 150ms; }
-    .reveal:nth-child(4) { animation-delay: 210ms; }
-    .reveal:nth-child(5) { animation-delay: 270ms; }
-
-    @keyframes rise {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes scanMove {
-      from { transform: translateY(-12px); }
-      to { transform: translateY(12px); }
-    }
-
-    @media (max-width: 900px) {
-      .hero-grid,
-      .grid-two {
-        grid-template-columns: 1fr;
-      }
-      .direct-links {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .topbar-inner {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-      .menu {
-        width: 100%;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .reveal {
-        opacity: 1;
-        transform: none;
-        animation: none;
-      }
-      #scene,
-      .tech-grid,
-      .scanlines {
-        display: none;
-      }
-    }
-  </style>
+  <meta name="description" content="Jia Hao Yeo — Computer Science undergraduate building practical software, browser testing tools, data generation libraries, and game systems." />
+  <link rel="preload" href="assets/fonts/epilogue-bold.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="assets/fonts/barlow-regular.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-  <canvas id="scene" aria-hidden="true"></canvas>
-  <div class="noise" aria-hidden="true"></div>
-  <div class="tech-grid" aria-hidden="true"></div>
-  <div class="scanlines" aria-hidden="true"></div>
-
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand">jia hao yeo // computer science</div>
-      <nav class="menu">
-        <a href="#education">Education</a>
-        <a href="#skills">Skills</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark and light mode" aria-pressed="false">Light Mode</button>
-    </div>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="top">
+    <a class="brand" href="#top" aria-label="Jia Hao Yeo, back to top">Jia Hao Yeo</a>
+    <nav aria-label="Main navigation">
+      <a href="#projects">Work</a>
+      <a href="#background">Background</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </header>
-
-  <main class="shell">
-    <section class="hero reveal">
-      <div class="hero-grid">
-        <div>
-          <p class="tag">Profile</p>
-          <h1>Jia Hao Yeo</h1>
-          <p class="intro">
-            Computer Science undergraduate specializing in real-time interactive simulation, with hands-on experience
-            in full-stack development, game systems, and practical software engineering.
-          </p>
-          <div class="stack">
-            <span class="pill">C / C++</span>
-            <span class="pill">C#</span>
-            <span class="pill">JavaScript</span>
-            <span class="pill">Python</span>
-            <span class="pill">ReactJS</span>
-            <span class="pill">NodeJS</span>
-          </div>
-        </div>
-        <aside class="hero-meta">
-          <p><strong>Email:</strong> <a href="mailto:jiahao.yeo.23@gmail.com">jiahao.yeo.23@gmail.com</a></p>
-          <p><strong>Phone:</strong> <a href="tel:+6597708284">+65 9770 8284</a></p>
-          <p><strong>GitHub:</strong> <a href="https://github.com/silver1713" target="_blank" rel="noopener">github.com/silver1713</a></p>
-          <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/jia-hao-yeo" target="_blank" rel="noopener">linkedin.com/in/jia-hao-yeo</a></p>
-        </aside>
+  <main id="main">
+    <section class="opening" aria-labelledby="intro-title">
+      <div class="introduction">
+        <h1 id="intro-title"><span>Software.</span><span>Systems.</span><span>Built to work.</span></h1>
+        <p class="profile">Jia Hao Yeo — Computer Science undergraduate</p>
+        <p class="intro-copy">I build full-stack applications, real-time interactive simulation and practical software engineering tools. I’m interested in turning ideas into reliable, usable systems.</p>
+        <a class="text-link" href="#projects"><span>Explore projects</span><svg class="arrow" viewBox="0 0 32 32" aria-hidden="true"><path d="M2 16h27M19 6l10 10-10 10"/></svg></a>
       </div>
+      <aside class="destinations" aria-labelledby="current-title">
+        <h2 id="current-title">Current work</h2>
+        <a class="destination" href="#automata">
+          <div class="destination-title"><h3>Automata CLI</h3><svg class="arrow" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 16h23M18 6l10 10-10 10"/></svg></div>
+          <p>Headless browser testing</p>
+          <ul class="technology" aria-label="Automata CLI technologies"><li>Python</li><li>Selenium</li><li>YAML</li></ul>
+        </a>
+        <a class="destination" href="#replion">
+          <div class="destination-title"><h3>Replion</h3><svg class="arrow" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 16h23M18 6l10 10-10 10"/></svg></div>
+          <p>Synthetic data generation</p>
+          <ul class="technology" aria-label="Replion technologies"><li>Python</li><li>YAML</li><li>Code generation</li></ul>
+        </a>
+      </aside>
     </section>
-
-    <section class="section reveal" id="education">
-      <p class="tag">Education</p>
-      <div class="grid-two">
-        <article class="card">
-          <h3>Singapore Institute of Technology</h3>
-          <p class="meta">B.S. Computer Science in Real-Time Interactive Simulation | Aug 2023 - Aug 2027 (Expected)</p>
-          <p>Relevant coursework: High Level Programming, Data Structures and Algorithms, Operating Systems, Computer Networks.</p>
-        </article>
-        <article class="card">
-          <h3>Temasek Polytechnic</h3>
-          <p class="meta">Diploma in Game Design and Development | Apr 2018 - Apr 2021</p>
-          <p>Relevant coursework: Databases, Operating Systems, Computer Networks, Computational Thinking.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section reveal" id="skills">
-      <p class="tag">Technical Skills</p>
-      <div class="grid-two">
-        <article class="card">
-          <h3>Programming Languages</h3>
-          <div class="stack">
-            <span class="pill">C</span>
-            <span class="pill">C++</span>
-            <span class="pill">C#</span>
-            <span class="pill">Java</span>
-            <span class="pill">Python</span>
-            <span class="pill">JavaScript</span>
-            <span class="pill">HTML</span>
-            <span class="pill">CSS</span>
-          </div>
-        </article>
-        <article class="card">
-          <h3>Technologies & Tools</h3>
-          <div class="stack">
-            <span class="pill">NodeJS</span>
-            <span class="pill">ReactJS</span>
-            <span class="pill">PostgreSQL</span>
-            <span class="pill">Electron</span>
-            <span class="pill">Bootstrap</span>
-            <span class="pill">Unity</span>
-            <span class="pill">Android Studio</span>
-            <span class="pill">Figma</span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section reveal" id="experience">
-      <p class="tag">Work Experience</p>
-      <article class="timeline-item">
-        <h3>Assistant Developer | Singapore Institute of Technology</h3>
-        <p class="meta">Apr 2024 - Aug 2024 | Singapore</p>
-        <ul>
-          <li>Developed and optimized the full-stack equipment booking system using JavaScript, HTML, and CSS.</li>
-          <li>Implemented logging and reservation features integrated with spreadsheet-based data storage to improve tracking accuracy.</li>
-        </ul>
-      </article>
-      <article class="timeline-item">
-        <h3>Research and Development Intern | Hitachi Asia</h3>
-        <p class="meta">Aug 2020 - Feb 2021 | Singapore</p>
-        <ul>
-          <li>Benchmarked Bluetooth indoor positioning approaches including RSSI trilateration, fingerprinting, and beacon mapping.</li>
-          <li>Designed and implemented Android screens for an indoor navigation prototype with simulated real-time location updates.</li>
-        </ul>
-      </article>
-    </section>
-
-    <section class="section reveal" id="projects">
-      <p class="tag">Project Work</p>
-      <div class="grid-two">
-        <article class="card">
+    <section id="projects" class="work-section" aria-labelledby="work-title">
+      <article class="project featured" id="automata">
+        <div class="project-heading">
+          <h2 class="section-label" id="work-title">Selected work</h2>
           <h3>Automata CLI</h3>
-          <p class="meta">2026 - Present | Python, Selenium, YAML</p>
-          <p>Developing a command-line browser testing framework that runs YAML-defined test suites headlessly with Selenium. The CLI uses a shared core library and reports test results in the terminal, supporting use in CI/CD workflows.</p>
-        </article>
-        <article class="card">
+          <p class="project-meta">2026 — Present</p>
+        </div>
+        <div class="project-content">
+          <p>A command-line tool for headless browser testing. <br class="comp-break">Automata CLI runs scripted browser interactions for <br class="comp-break">tasks such as form filling, navigation and content checks, <br class="comp-break">with a focus on simple configuration and reproducible runs.</p>
+          <ul class="technology"><li>Python</li><li>Selenium</li><li>YAML</li></ul>
+          <p class="project-note">Runs YAML-defined test suites through a shared core library, reports results in the terminal, and supports headless use in CI/CD workflows.</p>
+        </div>
+      </article>
+<article class="project" id="replion">
+        <div class="project-heading">
           <h3>Replion</h3>
-          <p class="meta">2026 - Present | Python, YAML, Code Generation</p>
-          <p>Developing a synthetic data generation library that parses and validates YAML models, with an interpreter and a compiler that emits executable Python code. Published version 0.1.0 to a private devpi package index.</p>
+          <p class="project-meta">2026 — Present</p>
+        </div>
+        <div class="project-content">
+          <p>Developing a synthetic data generation library that parses and validates YAML models, with an interpreter and a compiler that emits executable Python code.</p>
+          <ul class="technology"><li>Python</li><li>YAML</li><li>Code generation</li></ul>
+          <p class="project-note">Published version 0.1.0 to a private devpi package index.</p>
+        </div>
+      </article>
+      <div class="earlier-projects">
+        <h2>Earlier projects</h2>
+        <article class="project compact">
+          <div class="project-heading"><h3>Memory Flame</h3><p class="project-meta">2024 | OpenGL, C#, Game Engine</p></div>
+          <div class="project-content"><p>Led development of a custom OpenGL game engine/editor and integrated a C# scripting workflow to improve designer productivity.</p></div>
         </article>
-        <article class="card">
-          <h3>Movie Review Application</h3>
-          <p class="meta">2018 | Java, Android Studio</p>
-          <p>Built an Android movie review app with strong UI/UX foundations to support clear and engaging user flow.</p>
+        <article class="project compact">
+          <div class="project-heading"><h3>C++ JSON Parser</h3><p class="project-meta">2024 | C++, Compiler Concepts</p></div>
+          <div class="project-content"><p>Developed a parser that builds an AST node tree using object-oriented design as a core module in a software project.</p></div>
         </article>
-        <article class="card">
-          <h3>Game Review Website</h3>
-          <p class="meta">2018 | Node.js, SQL, Bootstrap</p>
-          <p>Built a full-stack review platform with backend APIs and responsive web interfaces for smooth content submission and browsing.</p>
+        <article class="project compact">
+          <div class="project-heading"><h3>Game Review Website</h3><p class="project-meta">2018 | Node.js, SQL, Bootstrap</p></div>
+          <div class="project-content"><p>Built a full-stack review platform with backend APIs and responsive web interfaces for smooth content submission and browsing.</p></div>
         </article>
-        <article class="card">
-          <h3>C++ JSON Parser</h3>
-          <p class="meta">2024 | C++, Compiler Concepts</p>
-          <p>Developed a parser that builds an AST node tree using object-oriented design as a core module in a software project.</p>
-        </article>
-        <article class="card">
-          <h3>Memory Flame</h3>
-          <p class="meta">2024 | OpenGL, C#, Game Engine</p>
-          <p>Led development of a custom OpenGL game engine/editor and integrated a C# scripting workflow to improve designer productivity.</p>
+        <article class="project compact">
+          <div class="project-heading"><h3>Movie Review Application</h3><p class="project-meta">2018 | Java, Android Studio</p></div>
+          <div class="project-content"><p>Built an Android movie review app with strong UI/UX foundations to support clear and engaging user flow.</p></div>
         </article>
       </div>
     </section>
-
-    <section class="section reveal" id="contact">
-      <p class="tag">Contact Me</p>
-      <h2>Let’s connect.</h2>
-      <p class="intro">I am open to internships, software engineering roles, and technical collaborations.</p>
+    <section id="background" class="background-section" aria-labelledby="background-title">
+      <h2 id="background-title">Engineering<br>background.</h2>
+      <div class="background-columns">
+        <section id="education" aria-labelledby="education-title">
+          <h3 id="education-title">Education</h3>
+          <article class="background-entry">
+            <h4>Singapore Institute of Technology</h4>
+            <p class="entry-subtitle">B.S. Computer Science in Real-Time Interactive Simulation</p>
+            <p class="entry-meta">Aug 2023 — Aug 2027 (Expected)</p>
+            <p>Relevant coursework: High Level Programming, Data Structures and Algorithms, Operating Systems, Computer Networks.</p>
+          </article>
+          <article class="background-entry">
+            <h4>Temasek Polytechnic</h4>
+            <p class="entry-subtitle">Diploma in Game Design and Development</p>
+            <p class="entry-meta">Apr 2018 — Apr 2021</p>
+            <p>Relevant coursework: Databases, Operating Systems, Computer Networks, Computational Thinking.</p>
+          </article>
+        </section>
+        <section id="experience" aria-labelledby="experience-title">
+          <h3 id="experience-title">Work experience</h3>
+          <article class="background-entry">
+            <h4>Assistant Developer</h4>
+            <p class="entry-subtitle">Singapore Institute of Technology</p>
+            <p class="entry-meta">Apr 2024 — Aug 2024 | Singapore</p>
+            <ul>
+              <li>Developed and optimized the full-stack equipment booking system using JavaScript, HTML, and CSS.</li>
+              <li>Implemented logging and reservation features integrated with spreadsheet-based data storage to improve tracking accuracy.</li>
+            </ul>
+          </article>
+          <article class="background-entry">
+            <h4>Research and Development Intern</h4>
+            <p class="entry-subtitle">Hitachi Asia</p>
+            <p class="entry-meta">Aug 2020 — Feb 2021 | Singapore</p>
+            <ul>
+              <li>Benchmarked Bluetooth indoor positioning approaches including RSSI trilateration, fingerprinting, and beacon mapping.</li>
+              <li>Designed and implemented Android screens for an indoor navigation prototype with simulated real-time location updates.</li>
+            </ul>
+          </article>
+        </section>
+      </div>
+    </section>
+    <section id="skills" class="skills-section" aria-labelledby="skills-title">
+      <h2 id="skills-title">Technical skills</h2>
+      <div class="skill-row"><h3>Programming languages</h3><p>C / C++ / C# / Java / Python / JavaScript / HTML / CSS</p></div>
+      <div class="skill-row"><h3>Technologies &amp; tools</h3><p>NodeJS / ReactJS / PostgreSQL / Electron / Bootstrap / Unity / Android Studio / Figma</p></div>
+    </section>
+    <section id="contact" class="contact-section" aria-labelledby="contact-title">
+      <div class="contact-intro">
+        <h2 id="contact-title">Let’s connect.</h2>
+        <p>I am open to internships, software engineering roles, and technical collaborations.</p>
+        <a class="email-link" href="mailto:jiahao.yeo.23@gmail.com">jiahao.yeo.23@gmail.com</a>
+        <div class="contact-links">
+          <a href="tel:+6597708284">+65 9770 8284</a>
+          <a href="https://github.com/silver1713" target="_blank" rel="noopener">GitHub <span class="visually-hidden">(opens in a new tab)</span></a>
+          <a href="https://linkedin.com/in/jia-hao-yeo" target="_blank" rel="noopener">LinkedIn <span class="visually-hidden">(opens in a new tab)</span></a>
+        </div>
+      </div>
       <form class="contact-form" action="mailto:jiahao.yeo.23@gmail.com" method="post" enctype="text/plain">
-        <label>
-          Name
-          <input type="text" name="name" required />
-        </label>
-        <label>
-          Email
-          <input type="email" name="email" required />
-        </label>
-        <label>
-          Message
-          <textarea name="message" required></textarea>
-        </label>
-        <button type="submit">Send Message</button>
+        <div class="form-row">
+          <label>Name<input name="name" type="text" autocomplete="name" required></label>
+          <label>Email<input name="email" type="email" autocomplete="email" required></label>
+        </div>
+        <label>Message<textarea name="message" rows="4" required></textarea></label>
+        <div class="form-action"><button type="submit">Send message</button><p>Opens your email app.</p></div>
       </form>
-      <p class="contact-note">Direct links</p>
-      <div class="direct-links">
-        <a class="direct-link" href="tel:+6597708284">
-          <span class="direct-link-head">
-            <span class="direct-link-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" role="img">
-                <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1-.24 11.35 11.35 0 0 0 3.57.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.49a1 1 0 0 1 1 1 11.35 11.35 0 0 0 .57 3.57 1 1 0 0 1-.24 1z"/>
-              </svg>
-            </span>
-            <strong>Phone</strong>
-          </span>
-          <span>+65 9770 8284</span>
-        </a>
-        <a class="direct-link" href="https://github.com/silver1713" target="_blank" rel="noopener">
-          <span class="direct-link-head">
-            <span class="direct-link-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" role="img">
-                <path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.1.82-.26.82-.58v-2.03c-3.34.73-4.04-1.41-4.04-1.41a3.17 3.17 0 0 0-1.34-1.75c-1.1-.74.08-.72.08-.72a2.5 2.5 0 0 1 1.83 1.23 2.53 2.53 0 0 0 3.46 1 2.53 2.53 0 0 1 .76-1.6c-2.67-.3-5.47-1.34-5.47-5.96a4.67 4.67 0 0 1 1.24-3.24 4.33 4.33 0 0 1 .12-3.19s1.01-.32 3.3 1.24a11.43 11.43 0 0 1 6 0c2.29-1.56 3.3-1.24 3.3-1.24a4.33 4.33 0 0 1 .12 3.19 4.67 4.67 0 0 1 1.24 3.24c0 4.63-2.8 5.66-5.48 5.96a2.84 2.84 0 0 1 .81 2.2v3.26c0 .32.21.69.82.58A12 12 0 0 0 12 .5z"/>
-              </svg>
-            </span>
-            <strong>GitHub</strong>
-          </span>
-          <span>github.com/silver1713</span>
-        </a>
-        <a class="direct-link" href="https://linkedin.com/in/jia-hao-yeo" target="_blank" rel="noopener">
-          <span class="direct-link-head">
-            <span class="direct-link-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" role="img">
-                <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.05-1.86-3.05-1.86 0-2.15 1.45-2.15 2.95v5.67H9.32V9h3.42v1.56h.05c.48-.9 1.64-1.86 3.37-1.86 3.61 0 4.28 2.37 4.28 5.45v6.3zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45z"/>
-              </svg>
-            </span>
-            <strong>LinkedIn</strong>
-          </span>
-          <span>linkedin.com/in/jia-hao-yeo</span>
-        </a>
-      </div>
     </section>
-
-    <footer class="reveal">
-      <div>Built for GitHub Pages. Last updated from resume details.</div>
-    </footer>
   </main>
-
-  <script>
-    (function () {
-      const storageKey = "theme";
-      const root = document.documentElement;
-      const toggle = document.getElementById("themeToggle");
-      if (!toggle) return;
-
-      const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-      const saved = localStorage.getItem(storageKey);
-      const initialTheme = saved === "light" || saved === "dark" ? saved : preferred;
-
-      function applyTheme(theme) {
-        root.setAttribute("data-theme", theme);
-        const isDark = theme === "dark";
-        toggle.textContent = isDark ? "Light Mode" : "Dark Mode";
-        toggle.setAttribute("aria-pressed", String(!isDark));
-        window.dispatchEvent(new CustomEvent("themechange", { detail: { theme } }));
-      }
-
-      applyTheme(initialTheme);
-      toggle.addEventListener("click", function () {
-        const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-        applyTheme(next);
-        localStorage.setItem(storageKey, next);
-      });
-    })();
-  </script>
-
-  <script type="module">
-    import * as THREE from "https://unpkg.com/three@0.162.0/build/three.module.js";
-
-    const canvas = document.getElementById("scene");
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (canvas && !reduceMotion) {
-      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.8));
-      renderer.setSize(window.innerWidth, window.innerHeight);
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
-      camera.position.z = 6.2;
-
-      const particleCount = window.innerWidth < 768 ? 70 : 120;
-      const positions = new Float32Array(particleCount * 3);
-      const velocities = [];
-
-      for (let i = 0; i < particleCount; i += 1) {
-        const i3 = i * 3;
-        positions[i3] = (Math.random() - 0.5) * 12;
-        positions[i3 + 1] = (Math.random() - 0.5) * 8;
-        positions[i3 + 2] = (Math.random() - 0.5) * 5;
-        velocities.push({
-          x: (Math.random() - 0.5) * 0.0045,
-          y: (Math.random() - 0.5) * 0.0045
-        });
-      }
-
-      const geo = new THREE.BufferGeometry();
-      geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-      const pointMaterial = new THREE.PointsMaterial({
-        color: 0xffffff,
-        size: 0.042,
-        transparent: true,
-        opacity: 0.62,
-        blending: THREE.AdditiveBlending
-      });
-      const points = new THREE.Points(geo, pointMaterial);
-      scene.add(points);
-
-      const lineMaterial = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.15 });
-      const maxLinks = particleCount * 12;
-      const lineGeo = new THREE.BufferGeometry();
-      const linePositions = new Float32Array(maxLinks * 6);
-      lineGeo.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
-      const lineSegments = new THREE.LineSegments(lineGeo, lineMaterial);
-      scene.add(lineSegments);
-
-      const ring = new THREE.Mesh(
-        new THREE.TorusGeometry(2.4, 0.009, 8, 96),
-        new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.09 })
-      );
-      ring.rotation.x = Math.PI * 0.5;
-      scene.add(ring);
-
-      const bounds = { x: 6, y: 4 };
-      let pointBaseOpacity = 0.52;
-      let lineBaseOpacity = 0.11;
-
-      function applySceneTheme(theme) {
-        const light = theme === "light";
-        const color = light ? 0x111111 : 0xffffff;
-        pointMaterial.color.setHex(color);
-        lineMaterial.color.setHex(color);
-        ring.material.color.setHex(color);
-        pointMaterial.blending = light ? THREE.NormalBlending : THREE.AdditiveBlending;
-        pointMaterial.needsUpdate = true;
-        pointBaseOpacity = light ? 0.24 : 0.52;
-        lineBaseOpacity = light ? 0.08 : 0.11;
-        ring.material.opacity = light ? 0.06 : 0.09;
-      }
-
-      function updateNetwork(time) {
-        let ptr = 0;
-        const pos = geo.attributes.position.array;
-
-        for (let i = 0; i < particleCount; i += 1) {
-          const i3 = i * 3;
-          pos[i3] += velocities[i].x;
-          pos[i3 + 1] += velocities[i].y;
-
-          if (Math.abs(pos[i3]) > bounds.x) velocities[i].x *= -1;
-          if (Math.abs(pos[i3 + 1]) > bounds.y) velocities[i].y *= -1;
-        }
-
-        for (let a = 0; a < particleCount; a += 1) {
-          const a3 = a * 3;
-          for (let b = a + 1; b < particleCount; b += 1) {
-            const b3 = b * 3;
-            const dx = pos[a3] - pos[b3];
-            const dy = pos[a3 + 1] - pos[b3 + 1];
-            const dz = pos[a3 + 2] - pos[b3 + 2];
-            const d = Math.sqrt(dx * dx + dy * dy + dz * dz);
-            if (d < 1.12 && ptr < linePositions.length - 6) {
-              linePositions[ptr++] = pos[a3];
-              linePositions[ptr++] = pos[a3 + 1];
-              linePositions[ptr++] = pos[a3 + 2];
-              linePositions[ptr++] = pos[b3];
-              linePositions[ptr++] = pos[b3 + 1];
-              linePositions[ptr++] = pos[b3 + 2];
-            }
-          }
-        }
-
-        while (ptr < linePositions.length) linePositions[ptr++] = 0;
-
-        pointMaterial.opacity = pointBaseOpacity + Math.sin(time * 0.0017) * 0.05;
-        lineMaterial.opacity = lineBaseOpacity + Math.sin(time * 0.0012) * 0.02;
-
-        geo.attributes.position.needsUpdate = true;
-        lineGeo.attributes.position.needsUpdate = true;
-      }
-
-      function animate(time = 0) {
-        updateNetwork(time);
-        scene.rotation.y += 0.0009;
-        ring.rotation.z += 0.0011;
-        renderer.render(scene, camera);
-        requestAnimationFrame(animate);
-      }
-
-      function onResize() {
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        camera.aspect = width / height;
-        camera.updateProjectionMatrix();
-        renderer.setSize(width, height);
-      }
-
-      const initialTheme = document.documentElement.getAttribute("data-theme") || "dark";
-      applySceneTheme(initialTheme);
-      window.addEventListener("themechange", (event) => {
-        applySceneTheme(event.detail?.theme || "dark");
-      });
-      window.addEventListener("resize", onResize);
-      animate();
-    }
-  </script>
+  <footer class="site-footer">
+    <p>Jia Hao Yeo <span>Built for GitHub Pages.</span></p>
+    <div class="footer-actions"><button id="themeToggle" type="button" aria-pressed="false">Dark mode</button><a href="#top">Back to top</a></div>
+  </footer>
+  <script src="assets/main.js"></script>
 </body>
 </html>
+
